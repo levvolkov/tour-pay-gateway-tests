@@ -1,0 +1,28 @@
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql-container
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_DATABASE: app
+      MYSQL_USER: app
+      MYSQL_PASSWORD: pass
+      MYSQL_ROOT_PASSWORD: rootpass
+
+  postgres:
+    image: postgres:latest
+    container_name: psql-container
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_DB: app
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: pass
+
+  node-app:
+    build: gate-simulator
+    image: node-app:1.0
+    container_name: node-container
+    ports:
+      - '9999:9999'
