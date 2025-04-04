@@ -1,0 +1,72 @@
+name: Java CI with Gradle
+
+on: [push, pull_request]
+
+jobs:
+  test-mysql:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+
+      - name: Grant execute permission
+        run: chmod +x gradlew
+
+      - name: Start containers (MySQL)
+        run: |
+          docker compose up -d mysql node-app
+          sleep 10  # Wait for DB initialization
+
+      - name: Initialize MySQL DB
+        run: |
+          docker exec mysql-container mysql -u root -prootpass -e "GRANT ALL PRIVILEGES ON app.* TO 'app'@'%';"
+          docker exec mysql-container mysql -u root -prootpass -e "FLUSH PRIVILEGES;"
+
+      - name: Run SUT (MySQL)
+        run: |
+          java -Dspring.datasource.url=jdbc:mysql://localhost:3306/app \
+               -Dspring.datasource.username=app \
+               -Dspring.datasource.password=pass \
+               -jar artifacts/aqa-shop.jar &
+          sleep 15  # Wait for app startup
+
+      - name: Run tests (MySQL)
+        run: |
+          ./gradlew clean test \
+            -Ddb.url=jdbc:mysql://localhost:3306/app \
+            -Dselenide.headless=true \
+            --info
+
+  test-postgres:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+
+      - name: Start containers (PostgreSQL)
+        run: |
+          docker compose up -d postgres node-app
+          sleep 10  # Wait for DB initialization
+
+      - name: Run SUT (PostgreSQL)
+        run: |
+          java -Dspring.datasource.url=jdbc:postgresql://localhost:5432/app \
+               -Dspring.datasource.username=app \
+               -Dspring.datasource.password=pass \
+               -jar artifacts/aqa-shop.jar &
+          sleep 15  # Wait for app startup
+
+      - name: Run tests (PostgreSQL)
+        run: |
+          ./gradlew clean test \
+            -Ddb.url=jdbc:postgresql://localhost:5432/app \
+            -Dselenide.headless=true \
+            --info
