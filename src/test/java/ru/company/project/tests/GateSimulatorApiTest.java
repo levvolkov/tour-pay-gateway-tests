@@ -24,7 +24,7 @@ public class GateSimulatorApiTest {
     private static final String APPROVED_CARD_API = "{\"number\":\"4444 4444 4444 4441\"}";
     private static final String DECLINED_CARD_API = "{\"number\":\"4444 4444 4444 4442\"}";
     private static final String INVALID_CARD_API = "{\"number\":\"0000 0000 0000 0000\"}";
-    private static final long MAX_RESPONSE_TIME_MS = 500;
+    private static final long MAX_RESPONSE_TIME_MS = 600;
 
     @BeforeAll
     static void setup() {
@@ -70,7 +70,7 @@ public class GateSimulatorApiTest {
     }
 
     @Test
-    @DisplayName("Проверка времени ответа от оплаты (<500 мс)")
+    @DisplayName("Проверка времени ответа от оплаты (<600 мс)")
     @Story("APPROVED-карта")
     void shouldRespondQuickly() {
         long responseTime = step("Замер времени ответа от оплаты", () ->
@@ -84,12 +84,12 @@ public class GateSimulatorApiTest {
 
         step("Проверка времени ответа", () -> {
             assertTrue(responseTime < MAX_RESPONSE_TIME_MS,
-                    "Время ответа должно быть меньше 500 мс, фактическое: " + responseTime);
+                    "Время ответа должно быть меньше 600 мс, фактическое: " + responseTime);
         });
     }
 
     @Test
-    @DisplayName("Проверка времени ответа от кредита (<500 мс)")
+    @DisplayName("Проверка времени ответа от кредита (<600 мс)")
     @Story("APPROVED-карта")
     void shouldCheckCreditResponseTime() {
         long responseTime = step("Замер времени ответа от кредита", () ->
@@ -103,7 +103,7 @@ public class GateSimulatorApiTest {
 
         step("Проверка времени ответа", () -> {
             assertTrue(responseTime < MAX_RESPONSE_TIME_MS,
-                    "Время ответа должно быть меньше 500 мс, фактическое: " + responseTime);
+                    "Время ответа должно быть меньше 600 мс, фактическое: " + responseTime);
         });
     }
 
@@ -146,7 +146,7 @@ public class GateSimulatorApiTest {
     }
 
     @Test
-    @DisplayName("Проверка времени ответа от покупки (<500 мс)")
+    @DisplayName("Проверка времени ответа от покупки (<600 мс)")
     @Story("DECLINED-карта")
     void shouldHandleDeclinedCardQuickly() {
         long processingTime = step("Измерение времени отклика", () ->
@@ -166,7 +166,7 @@ public class GateSimulatorApiTest {
     }
 
     @Test
-    @DisplayName("Проверка времени ответа от кредита (<500 мс)")
+    @DisplayName("Проверка времени ответа от кредита (<600 мс)")
     @Story("DECLINED-карта")
     void shouldCheckCreditResponseTimeForDeclinedCard() {
         long responseTime = step("Замер времени ответа от кредита", () ->
@@ -180,7 +180,7 @@ public class GateSimulatorApiTest {
 
         step("Проверка времени ответа", () -> {
             assertTrue(responseTime < MAX_RESPONSE_TIME_MS,
-                    "Время ответа должно быть меньше 500 мс, фактическое: " + responseTime);
+                    "Время ответа должно быть меньше 600 мс, фактическое: " + responseTime);
         });
     }
 

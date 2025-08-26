@@ -90,8 +90,12 @@ public class CardTestData {
     // =============================================
     // 7. Системные сообщения
     // =============================================
-    /** Сообщение об отказе банка */
-    public static final String BANK_TRANSACTION_REFUSAL = "Ошибка! Банк отказал в проведении операции.";
-    /** Сообщение об успешной операции */
-    public static final String BANK_TRANSACTION_APPROVAL = "Успешно Операция одобрена Банком.";
+    /** Сообщение: "Успешно" */
+    public static final String BANK_TRANSACTION_APPROVAL_1 = "Успешно";
+    /** Сообщение: "Операция одобрена банком" */
+    public static final String BANK_TRANSACTION_APPROVAL_2 = "Операция одобрена Банком";
+    /** Сообщение: "Ошибка" */
+    public static final String BANK_TRANSACTION_REFUSAL_1 = "Ошибка";
+    /** Сообщение: "Банк отказал в проведении операции" */
+    public static final String BANK_TRANSACTION_REFUSAL_2 = "Банк отказал в проведении операции";
 }

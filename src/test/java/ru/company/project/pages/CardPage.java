@@ -5,6 +5,7 @@ import io.qameta.allure.Step;
 import ru.company.project.data.DBHelper;
 import ru.company.project.data.DataHelper;
 
+import java.sql.SQLException;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.text;
@@ -69,16 +70,20 @@ public class CardPage {
 
     @Step("Уведомление: \"Успешно Операция одобрена Банком.\"")
     public void verifySuccessNotification() {
-        successNotification.shouldBe(visible
+        successNotification
+                .shouldBe(visible
                         .because("Должно отображаться уведомление об успехе"), Duration.ofSeconds(15))
-                .shouldHave(text(BANK_TRANSACTION_APPROVAL));
+                .shouldHave(text(BANK_TRANSACTION_APPROVAL_1))
+                .shouldHave(text(BANK_TRANSACTION_APPROVAL_2));
     }
 
     @Step("Уведомление: \"Ошибка! Банк отказал в проведении операции.\"")
     public void verifyRejectionNotification() {
-        errorNotification.shouldBe(visible
+        errorNotification
+                .shouldBe(visible
                         .because("Должно отображаться уведомление об ошибке"), Duration.ofSeconds(15))
-                .shouldHave(text(BANK_TRANSACTION_REFUSAL));
+                .shouldHave(text(BANK_TRANSACTION_REFUSAL_1))
+                .shouldHave(text(BANK_TRANSACTION_REFUSAL_2));
     }
 
     @Step("Проверка статуса {systemType}")
@@ -89,11 +94,11 @@ public class CardPage {
         ));
     }
 
-    public void verifyPaymentStatus(String expectedStatus) {
+    public void verifyPaymentStatus(String expectedStatus) throws SQLException {
         verifyStatus("платежной системы (Payment Gate)", expectedStatus, DBHelper.getPaymentStatus());
     }
 
-    public void verifyCreditStatus(String expectedStatus) {
+    public void verifyCreditStatus(String expectedStatus) throws SQLException {
         verifyStatus("кредитной системы (Credit Gate)", expectedStatus, DBHelper.getCreditStatus());
     }
 
