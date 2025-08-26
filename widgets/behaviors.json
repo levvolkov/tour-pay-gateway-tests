@@ -1,1 +1,1 @@
-{"total":0,"items":[]}
+{"total":3,"items":[{"uid":"a80ce3e1ec7d79f95ad3d88e74036a10","name":"Покупка тура в кредит","statistic":{"failed":3,"broken":0,"skipped":0,"passed":3,"unknown":0,"total":6}},{"uid":"c4fa268551df25ba3ec4ae4486ff993c","name":"Покупка тура по карте","statistic":{"failed":3,"broken":0,"skipped":0,"passed":3,"unknown":0,"total":6}},{"uid":"342ead27211e2a529f704100f1f9210f","name":"Тестирование API симулятора банковских сервисов","statistic":{"failed":0,"broken":0,"skipped":0,"passed":3,"unknown":0,"total":3}}]}

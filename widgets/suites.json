@@ -1,1 +1,1 @@
-{"total":0,"items":[]}
+{"total":3,"items":[{"uid":"ccecf4577fd17c94362336a647387185","name":"ru.company.project.tests.CreditTest","statistic":{"failed":7,"broken":0,"skipped":0,"passed":13,"unknown":0,"total":20}},{"uid":"d752da8100845319097df4de81c141e3","name":"ru.company.project.tests.PaymentTest","statistic":{"failed":7,"broken":0,"skipped":0,"passed":13,"unknown":0,"total":20}},{"uid":"261e5f00af8a2aed03853e89b54594d3","name":"ru.company.project.tests.GateSimulatorApiTest","statistic":{"failed":0,"broken":0,"skipped":0,"passed":9,"unknown":0,"total":9}}]}
