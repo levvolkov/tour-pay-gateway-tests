@@ -1,6 +1,11 @@
 # «Автоматизация тестирования веб-сервиса, взаимодействующего с СУБД и API Банка»
 
-[![CI Status](https://github.com/levvolkov/tour-pay-gateway-tests/actions/workflows/gradle.yml/badge.svg)](https://github.com/levvolkov/tour-pay-gateway-tests/actions) &nbsp; [![Allure Passed](https://img.shields.io/badge/dynamic/json?url=https://github.com/levvolkov/tour-pay-gateway-tests/raw/main/documentation/allure-report/widgets/summary.json&query=statistic.passed&label=Passed&color=green)](https://levvolkov.github.io/tour-pay-gateway-tests/documentation/allure-report) &nbsp; [![Allure Failed](https://img.shields.io/badge/dynamic/json?url=https://github.com/levvolkov/tour-pay-gateway-tests/raw/main/documentation/allure-report/widgets/summary.json&query=statistic.failed&label=Failed&color=red)](https://levvolkov.github.io/tour-pay-gateway-tests/documentation/allure-report) &nbsp; [![Allure Report](https://img.shields.io/badge/Allure_Report-View-green.svg)](https://levvolkov.github.io/tour-pay-gateway-tests/documentation/allure-report) &nbsp; [![Bugs in Issues](https://img.shields.io/badge/Bug_Reports-View_Issues-red.svg)](https://github.com/levvolkov/tour-pay-gateway-tests/issues)
+[![CI Status](https://github.com/levvolkov/tour-pay-gateway-tests/actions/workflows/gradle.yml/badge.svg)](https://github.com/levvolkov/tour-pay-gateway-tests/actions) &nbsp;
+[![Allure Report](https://img.shields.io/badge/Allure_Report-View-green.svg)](https://levvolkov.github.io/tour-pay-gateway-tests) &nbsp;
+[![Failed](https://img.shields.io/badge/dynamic/json?url=https://levvolkov.github.io/tour-pay-gateway-tests/widgets/summary.json&query=statistic.failed&label=Failed&color=red)]() &nbsp;
+[![Passed](https://img.shields.io/badge/dynamic/json?url=https://levvolkov.github.io/tour-pay-gateway-tests/widgets/summary.json&query=statistic.passed&label=Passed&color=green)]() &nbsp;
+[![Broken](https://img.shields.io/badge/dynamic/json?url=https://levvolkov.github.io/tour-pay-gateway-tests/widgets/summary.json&query=statistic.broken&label=Broken&color=yellow)]() &nbsp;
+[![Bugs in Issues](https://img.shields.io/badge/Bug_Reports-View_Issues-red.svg)](https://github.com/levvolkov/tour-pay-gateway-tests/issues)
 
 <br>
 
@@ -55,44 +60,71 @@ tour-pay-gateway-tests/
 - [Отчёт по итогам тестировании](documentation/report.md)
 - [Отчет по итогам автоматизации](documentation/summary.md)
 
-## 🚀 Процедура запуска автотестов
-1. **Клонируйте и откройте проект в IDEA:**
+## 🚀 Процедура запуска веб-сервиса
+#### 1. Клонируйте и откройте проект в IDEA:
 ```bash
 git clone https://github.com/levvolkov/tour-pay-gateway-tests.git
 ```
 
-2. **Запустите Docker Desktop и выполните:**
+#### 2. Запустите Docker Desktop и выполните:
 ```bash
 # Соберет контейнеры MySQL, PostgreSQL, Bank Simulator
 docker compose up -d  
-
+```
+```bash
 # Для запуска приложение на MySQL СУБД
-java "-Dspring.datasource.url=jdbc:mysql://localhost:3306/app" -jar artifacts/aqa-shop.jar
-
+./gradlew runMySQL  
+```
+```bash
 # Для запуска приложение на PostgreSQL СУБД
-java "-Dspring.datasource.url=jdbc:postgresql://localhost:5432/app" -jar artifacts/aqa-shop.jar
+./gradlew runPostgreSQL
 ```
 
-3. **Запустите автотесты:**
+## 🧪 Процедура запуска автотестов
+#### 1. Для запуска автотестов MySQL:
 ```bash
-# Для MySQL:
-./gradlew clean test "-Ddb.url=jdbc:mysql://localhost:3306/app" 
+# Тесты в браузере Chrome
+./gradlew clean testMySQLChrome
+```
+```bash
+# Тесты в браузере Firefox
+./gradlew clean testMySQLFirefox
+```
+```bash
+# Тесты в браузере Safari
+./gradlew clean testMySQLSafari
+````
 
-# Для PostgreSQL:
-./gradlew clean test "-Ddb.url=jdbc:postgresql://localhost:5432/app"
+#### 2. Для запуска автотестов PostgreSQL:
+```bash
+# Тесты в браузере Chrome
+./gradlew clean testPostgreSQLChrome
+```
+```bash
+# Тесты в браузере Firefox
+./gradlew clean testPostgreSQLFirefox
+```
+```bash
+# Тесты в браузере Safari
+./gradlew clean testPostgreSQLSafari
+````
 
-# Для API тестов (если необходимо отдельно)
+#### 3. Для API тестов (если необходимо отдельно):
+```bash
 ./gradlew clean test --tests GateSimulatorApiTest
+```
 
-# Просмотр Allure-отчёта:
+#### 4. Для просмотра Allure-отчёта:
+```bash
 ./gradlew allureServe
 ```
 
-**Ошибка запуска приложения: если порт занят**
-```bash
-# Найти PID процесса, использующий порт:
-lsof -i :8080
-
-# Принудительное завершение с помощью флага -9:
-kill -9 <PID>
-```
+> [!WARNING]\
+> **Ошибка запуска приложения: если порт занят**
+> ```bash
+> # Найти PID процесса, использующий порт:
+> lsof -i :8080
+>
+> # Принудительное завершение с помощью флага -9:
+> kill -9 <PID>
+> ```

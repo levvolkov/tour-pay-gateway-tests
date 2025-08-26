@@ -16,7 +16,7 @@
 - **Неуспешные:** 14 (29 %)
 - **Баг-репорты:** 4 (остальные падения связаны с теми же дефектами)
 
-**Детализация:** &nbsp; [![Allure Report](https://img.shields.io/badge/Allure_Report-View-green.svg)](https://levvolkov.github.io/tour-pay-gateway-tests/documentation/allure-report) &nbsp; [![Bugs in Issues](https://img.shields.io/badge/Bug_Reports-View_Issues-red.svg)](https://github.com/levvolkov/tour-pay-gateway-tests/issues)
+**Детализация:** &nbsp; [![Allure Report](https://img.shields.io/badge/Allure_Report-View-green.svg)](https://levvolkov.github.io/tour-pay-gateway-tests) &nbsp; [![Bugs in Issues](https://img.shields.io/badge/Bug_Reports-View_Issues-red.svg)](https://github.com/levvolkov/tour-pay-gateway-tests/issues)
 
 ## Критические проблемы
 **1. Валидация полей:**
